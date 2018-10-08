@@ -13,9 +13,9 @@
   <title>Bootstrap Theme</title>
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#main-nav" id="home">
   <!-- NAVINGATION SECTION-->
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
     <div class="container">
       <a href="index.html" class="navbar-brand">LoopLAB</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -30,10 +30,10 @@
             <a href="#explore-head-section" class="nav-link">Explore</a>
           </li>
           <li class="nav-item">
-            <a href="#home-head-section" class="nav-link">Create</a>
+            <a href="#create-head-section" class="nav-link">Create</a>
           </li>
           <li class="nav-item">
-            <a href="#home-head-section" class="nav-link">Share</a>
+            <a href="#share-head-section" class="nav-link">Share</a>
           </li>
 
         </ul>
@@ -314,6 +314,28 @@
   <script>
     // Get the current year for the copyright
     $('#year').text(new Date().getFullYear());
+
+    //Init Scrollspy
+    $('body').scrollspy({ target: '#main-nav' })
+
+    $('#main-nav a').on('click', function (e) {
+      // Check for a hash value
+      if (this.hash !== '') {
+        // Prevent default behavior
+        e.preventDefault();
+
+        // Store hash
+        const hash = this.hash;
+
+        // Animate smooth scroll
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 900, function () {
+          // Add hash to URL after scroll
+          window.location.hash = hash;
+        });
+      }
+    });
   </script>
 </body>
 
